@@ -1,0 +1,36 @@
+[
+    {
+      "TicketID": 28890,
+      "CategoryID": 57526,
+      "CustomerID": 97979,
+      "CustomerName": "Cox Workman",
+      "CustomerEmail": "cox.workman@neoassist.com",
+      "DateCreate": "2017-12-13 03:08:42",
+      "DateUpdate": "2018-01-04 09:18:25",
+      "Interactions": [
+        {
+          "Subject": "Sem Assunto",
+          "Message": "Estou procurando bermuda masculina Com bolsos laterais 100 por cento poliéster.",
+          "DateCreate": "2017-12-13 03:08:42",
+          "Sender": "Customer"
+        }
+      ]
+    },
+    {
+      "TicketID": 28891,
+      "CategoryID": 46403,
+      "CustomerID": 97974,
+      "CustomerName": "Vilma Mcmahon",
+      "CustomerEmail": "vilma.mcmahon@neoassist.com",
+      "DateCreate": "2017-12-25 03:12:39",
+      "DateUpdate": "2018-02-12 05:14:11",
+      "Interactions": [
+        {
+          "Subject": "Reclamação",
+          "Message": "Boa noite! Comprei na loja um tênis para minha filha, porém está manchando a meia. O que fazer para não estragar todas as meias???",
+          "DateCreate": "2017-12-25 03:12:39",
+          "Sender": "Customer"
+        }
+      ]
+    }
+]
