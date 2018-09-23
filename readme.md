@@ -46,11 +46,13 @@ Links disponíveis na API.
 Serviços que não precisam de autenticação do usuário
 ##### Tickets
 GET /api/v1/tickets
-| Parâmetro | Formato | Descrição |
-|-----|----| -----|
-| date_create_start | YYYY-MM-DD | Para filtrar tickets pela data de criação. Data Inicial.
-| date_create_end | YYYY-MM-DD | Data final do intervalo de filtro. As duas devem ser informadas.
-| order | campo.asc\|desc | Ordenação dos itens. Exemplo: date_create.asc.
+
+Parâmetro         | Formato         | Descrição
+----------------- | --------------- | -------------------------------------------------------
+date_create_start | YYYY-MM-DD      | Para filtrar tickets pela data de criação. Data Inicial.
+date_create_end   | YYYY-MM-DD      | Data final do intervalo de filtro. As duas devem ser informadas.
+order             | campo.asc\|desc | Ordenação dos itens. Exemplo: date_create.asc.
+
 ## Rodando os testes
 
 Para rodar os testes unitários, entre na pasta da aplicação e use o seguinte comando:
