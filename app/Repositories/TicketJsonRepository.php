@@ -52,7 +52,7 @@ class TicketJsonRepository implements TicketRepositoryInterface
 
     public function save(Collection $tickets)
     {
-        return Storage::put($this->path, $tickets->toJson());
+        return file_put_contents($this->path, $tickets->toJson());
     }
 
 

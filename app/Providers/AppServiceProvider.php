@@ -52,7 +52,7 @@ class AppServiceProvider extends ServiceProvider
                 Collection::make(
                     json_decode(Storage::get(config('app.tickets_json')), true)
                 ),
-                Storage::url(config('app.tickets_json'))
+                storage_path(config('app.tickets_json'))
             );
         });
 

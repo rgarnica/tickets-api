@@ -38,7 +38,7 @@ class TicketSentimentAnalyserTest extends TestCase
         );
 
         $classifier->train(
-            new CsvDataset(storage_path('app/sentences.csv'), 1, true)
+            new CsvDataset(storage_path('tests/sentences.csv'), 1, true)
         );
 
         $an = new TicketSentimentAnalyser(
