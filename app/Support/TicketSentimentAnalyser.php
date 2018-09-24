@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Support;
 
 class TicketSentimentAnalyser extends TicketAnalyser
 {
@@ -9,15 +9,15 @@ class TicketSentimentAnalyser extends TicketAnalyser
 
     const NEGATIVE_WEIGHT = 0.40;
 
-    public function __construct(SentimentAnalyserInterface $classifier, array $ticket, float $weight)
+    public function __construct(SentimentAnalyserInterface $classifier, float $weight)
     {
-        parent::__construct($ticket, $weight);
+        parent::__construct($weight);
         $this->classifier = $classifier;
     }
 
-    private function getCostumerInteractions()
+    private function getCostumerInteractions($ticket)
     {
-        return array_filter($this->ticket["Interactions"], function($item) {
+        return array_filter($ticket["Interactions"], function($item) {
             return $item["Sender"] === "Customer";
         });
     }
@@ -29,10 +29,10 @@ class TicketSentimentAnalyser extends TicketAnalyser
         }, $interactions);
     }
 
-    public function run()
+    public function run(array $ticket)
     {
         $results = [];
-        $interactions = $this->getCostumerInteractions();
+        $interactions = $this->getCostumerInteractions($ticket);
         $sentences = $this->getInteractionsSentences($interactions);
         $result = $this->classifier->predict($sentences);
 

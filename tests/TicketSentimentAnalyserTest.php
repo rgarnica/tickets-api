@@ -1,11 +1,11 @@
 <?php
 
 use Phpml\Dataset\CsvDataset;
-use App\Services\SentimentAnalyser;
-use App\Services\TicketDateAnalyser;
+use App\Support\SentimentAnalyser;
+use App\Support\TicketDateAnalyser;
 use Phpml\Classification\NaiveBayes;
 use Phpml\Tokenization\WordTokenizer;
-use App\Services\TicketSentimentAnalyser;
+use App\Support\TicketSentimentAnalyser;
 use App\Repositories\TicketJsonRepository;
 use Phpml\FeatureExtraction\TfIdfTransformer;
 use Phpml\FeatureExtraction\TokenCountVectorizer;
@@ -43,11 +43,10 @@ class TicketSentimentAnalyserTest extends TestCase
 
         $an = new TicketSentimentAnalyser(
             $classifier,
-            $ticket,
             1
         );
 
-        $result = $an->run();
+        $result = $an->run($ticket);
 
         $this->assertTrue(is_float($result));        
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Support;
 
 use Carbon\Carbon;
 
@@ -9,11 +9,11 @@ class TicketDateAnalyser extends TicketAnalyser
 
     
 
-    public function run()
+    public function run(array $ticket)
     {
         
-        $dateCreate = Carbon::parse($this->ticket['DateCreate']);
-        $dateUpdate = Carbon::parse($this->ticket['DateUpdate']);
+        $dateCreate = Carbon::parse($ticket['DateCreate']);
+        $dateUpdate = Carbon::parse($ticket['DateUpdate']);
 
         return ($dateUpdate->diffInDays($dateCreate) / 100) * $this->weight;
 

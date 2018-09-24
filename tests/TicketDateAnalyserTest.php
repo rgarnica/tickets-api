@@ -1,6 +1,6 @@
 <?php
 
-use App\Services\TicketDateAnalyser;
+use App\Support\TicketDateAnalyser;
 
 class TicketDateAnalyserTest extends TestCase
 {
@@ -23,7 +23,7 @@ class TicketDateAnalyserTest extends TestCase
     public function testCanReturnDateImportanceRating()
     {
         $ticket = $this->makeTicketArray();
-        $result = (new TicketDateAnalyser($ticket, 1))->run();
+        $result = (new TicketDateAnalyser(1))->run($ticket);
         $this->assertEquals(0.22, $result);
     }
 
