@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Phpml\ModelManager;
 use Phpml\Dataset\CsvDataset;
+use App\Support\SentimentAnalyser;
 use Illuminate\Support\Collection;
 use Phpml\Classification\NaiveBayes;
 use Phpml\Tokenization\WordTokenizer;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\TicketJsonRepository;
 use App\Services\SentimentAnalyserTrainer;
+use App\Support\SentimentAnalyserInterface;
 use Phpml\FeatureExtraction\TfIdfTransformer;
 use App\Repositories\TicketRepositoryInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
