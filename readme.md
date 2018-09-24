@@ -40,6 +40,22 @@ Caso a porta já esteja em uso por outra aplicação em seu computador você pod
 
 Se enfrentar problemas de permissão de gravação no file system, por favor dê permissao na pasta `storage` em seu computador e reinicie os containers.
 
+#### Classificação dos tickets
+
+Para classificar os tickets, use o seguinte comando:
+
+```
+php artisan tickets:classify app/sentences.csv
+```
+Esse comando criará os índices PriorityLabel e PriorityPoints a cada ticket.
+
+Obs: Se estiver usando o docker, para executar esse comando entre no container usando o seguinte comando no diretório da aplicação:
+
+```
+docker-compose exec php bash
+```
+
+
 ### API End Points
 Links disponíveis na API.
 #### Públicos
@@ -51,7 +67,9 @@ Parâmetro         | Formato         | Descrição
 ----------------- | --------------- | -------------------------------------------------------
 date_create_start | YYYY-MM-DD      | Para filtrar tickets pela data de criação. Data Inicial.
 date_create_end   | YYYY-MM-DD      | Data final do intervalo de filtro. As duas devem ser informadas.
-order             | campo.asc\|desc | Ordenação dos itens. Exemplo: date_create.asc.
+priority_label    | Normal\|Alta    | Filtrar por prioridade
+page              | número          | Controle da paginação
+order_by          | campo.asc\|desc | Ordenação dos itens. Exemplo: date_create.asc.<br/>priority_points.asc
 
 ## Rodando os testes
 
@@ -63,3 +81,4 @@ vendor/bin/phpunit
 ## Ferramentas Utilizadas
 
 * [Lumen](https://lumen.laravel.com/docs/5.7) - Framework Utilizado
+* [PHP-ML](https://php-ml.readthedocs.io/en/latest/) - Biblioteca Machine Learning para classificar tickets
