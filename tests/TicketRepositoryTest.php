@@ -14,7 +14,8 @@ class TicketRepositoryTest extends TestCase
         $json = json_decode($jsonFile, true);
 
         return new TicketJsonRepository(
-            collect($json)
+            collect($json),
+            storage_path('tests/tickets-test.json')
         );
     }
 
