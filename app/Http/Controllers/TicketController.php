@@ -18,7 +18,7 @@ class TicketController extends Controller
         ]);
 
         $tickets = $ticketsRepo->filter(
-                $request->only('date_create_start', 'date_create_end')
+                $request->only('date_create_start', 'date_create_end', 'priority_label')
             )
             ->order($request->input('order_by'))
             ->get()

@@ -4,15 +4,18 @@ namespace App\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
 
 class TicketJsonRepository implements TicketRepositoryInterface
 {
 
     private $tickets;
+    private $path;
 
-    public function __construct(Collection $tickets) 
+    public function __construct(Collection $tickets, string $path) 
     {
         $this->tickets = $tickets;
+        $this->path = $path;
     }
 
     public function get() : Collection
@@ -29,6 +32,10 @@ class TicketJsonRepository implements TicketRepositoryInterface
                 $filters['date_create_end']
             );
             
+        } 
+        
+        if (isset($filters['priority_label'])) {
+            $this->tickets = $this->tickets->where('PriorityLabel', $filters['priority_label'])->values();
         }
 
         return $this;
@@ -41,6 +48,11 @@ class TicketJsonRepository implements TicketRepositoryInterface
         }
 
         return $this;
+    }
+
+    public function save(Collection $tickets)
+    {
+        return Storage::put($this->path, $tickets->toJson());
     }
 
 
@@ -68,7 +80,7 @@ class TicketJsonRepository implements TicketRepositoryInterface
         } else {
 
             $this->tickets = 
-                $this->tickets->$collectionMethod($field)->values();
+                $this->tickets->$collectionMethod(ucfirst(camel_case($field)))->values();
             
         }
     }
