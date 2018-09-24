@@ -2,12 +2,20 @@
 
 namespace App\Providers;
 
+use Phpml\ModelManager;
+use Phpml\Dataset\CsvDataset;
 use Illuminate\Support\Collection;
+use Phpml\Classification\NaiveBayes;
+use Phpml\Tokenization\WordTokenizer;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\TicketJsonRepository;
+use App\Services\SentimentAnalyserTrainer;
+use Phpml\FeatureExtraction\TfIdfTransformer;
 use App\Repositories\TicketRepositoryInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Phpml\FeatureExtraction\TokenCountVectorizer;
+use App\Services\SentimentAnalyserTrainerInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -40,8 +48,17 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(TicketRepositoryInterface::class, function () {
             return new TicketJsonRepository(
                 Collection::make(
-                    json_decode(Storage::disk('local')->get('tickets.json'), true)
-                )
+                    json_decode(Storage::get(config('app.tickets_json')), true)
+                ),
+                Storage::url(config('app.tickets_json'))
+            );
+        });
+
+        $this->app->bind(SentimentAnalyserInterface::class, function() {
+            return new SentimentAnalyser(
+                new TokenCountVectorizer(new WordTokenizer()),
+                new TfIdfTransformer(),
+                new NaiveBayes()
             );
         });
     }
